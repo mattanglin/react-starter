@@ -2,22 +2,35 @@
 Universal React / Redux Starter App
 
 ## Roadmap
+- [x] Basic SSR setup
+- [x] Routing (RFR)
+- [ ] Styling (Emotion)
+- [ ] Universal API client
+- [ ] api proxy
+- [ ] auth proxy
 - [ ] Dev Flow
 - [ ] Prod Build
 - [ ] code splitting with universal react component
+- [ ] Jest unit testing
+- [ ] Cypress functional testing
 
 File Structure:
+```
 /
-config/
-  server.babel.js
-scripts/
-  build.js
-  start.js
-  server.js
-  watch.js
+webpack/
+  dev.config.js
+  dev.client.config.babel.js
+  dev.server.config.babel.js
+  devServer.js
+  prod.config.js
+  prod.client.config.babel.js
+  prod.server.config.js
+  universal-webpack-settings.json
 src/
-  server.js
   client.js
+  server.js
+  startServer.js
+  App.js
   Html.js
   components/
     index.js
@@ -27,4 +40,4 @@ src/
     createStore.js
     reducer.js
 static/
-  
+```
