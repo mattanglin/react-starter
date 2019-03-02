@@ -7,7 +7,7 @@ module.exports = {
   mode: 'development',
   entry: './src/client.js',
   output: {
-    path: path.resolve('projectDir', 'build/assets'),
+    path: path.resolve(projectDir, 'build/assets'),
     publicPath: '/assets/',
     filename: '[name].[hash].js',
     chunkFilename: '[name].[hash].js',
