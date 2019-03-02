@@ -8,12 +8,16 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src/**/*.js",
+    "test:unit": "jest TODO",
+    "test:functional": "cypress TODO",
     "dev": "npm run dev:server:prepare && npm run dev:run",
     "dev:run": "concurrently --kill-others \"npm run dev:server:build\" \"npm run dev:server:run\" \"npm run dev:client:run\"",
     "dev:server:prepare": "universal-webpack --settings ./webpack/universal-webpack-settings.json prepare",
     "dev:server:build": "better-npm-run dev:server:build",
     "dev:server:run": "better-npm-run dev:server:run",
-    "dev:client:run": "better-npm-run dev:client:run"
+    "dev:client:run": "better-npm-run dev:client:run",
+    "build": "better-npm-run build",
+    "start": "better-npm-run start"
   },
   "betterScripts": {
     "dev:server:build": {
@@ -27,6 +31,14 @@
     "dev:client:run": {
       "command": "webpack-dev-server --hot --config ./webpack/dev.client.config.babel.js",
       "env": {}
+    },
+    "build": {
+      "command": "TODO",
+      "env": {}
+    },
+    "start": {
+      "command": "TODO",
+      "env": {}
     }
   },
   "dependencies": {
@@ -39,7 +51,11 @@
     "react-hot-loader": "^4.7.1",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
-    "redux-first-router": "^2.1.1"
+    "redux-first-router": "^2.1.1",
+    "redux-first-router-link": "^2.1.1",
+    "redux-first-router-restore-scroll": "^1.2.2",
+    "redux-thunk": "^2.3.0",
+    "serialize-javascript": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -54,6 +70,7 @@
     "concurrently": "^4.1.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-webpack": "^0.11.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",

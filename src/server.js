@@ -1,28 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
+import { Provider } from 'react-redux';
 import express from 'express';
 import path from 'path';
+import createStore from 'state/createStore';
 import Html from './Html';
 import App from './App';
+
+// Render React App Markup for response
+const renderApp = ({ assets, store }) => `<doctype html>${ReactDOM.renderToString(
+  <Html
+    assets={assets}
+    component={(
+      <Provider key="provider" store={store}>
+        <App />
+      </Provider>
+    )}
+    store={store}
+  />
+)}`;
 
 function startServer(parameters) {
   const app = express();
 
+  // Static assets
   app.use(express.static(path.join(__dirname, '..', '/build/assets')));
 
   // TODO MIDDLEWARES!
-  // TODO CREATE STORE!
 
   // React SSR
   app.use((req, res) => {
-    const content = ReactDOM.renderToString(
-      <Html
-        assets={parameters.chunks()}
-        component={<App />}
-      />
-    );
+    const data = {};
+    const { store, thunk } = createStore(data, [req.originalUrl]);
+    const assets = parameters.chunks();
 
-    return res.send(content);
+    // TODO Server Side routing thunk
+    console.log(thunk);
+
+    return res.send(renderApp({ store, assets }));
   });
 
   // TODO ERROR HANDLING!
