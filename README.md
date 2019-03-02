@@ -2,10 +2,9 @@
 Universal React / Redux Starter App
 
 ## Roadmap
-- [ ] webpack / universal-webpack
-- [ ] react-hot-loader
-- [ ] React / Redux / redux-first-router / emotion (NO CSS)
-- [ ] better-npm-scripts for multi env
+- [ ] Dev Flow
+- [ ] Prod Build
+- [ ] code splitting with universal react component
 
 File Structure:
 /
