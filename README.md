@@ -4,7 +4,8 @@ Universal React / Redux Starter App
 ## Roadmap
 - [x] Basic SSR setup
 - [x] Routing (RFR)
-- [ ] Styling (Emotion)
+- [x] Styling (Emotion)
+- [ ] @babel/register for dev server build instead of babel-loader
 - [ ] Universal API client
 - [ ] api proxy
 - [ ] auth proxy

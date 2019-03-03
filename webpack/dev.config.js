@@ -54,6 +54,7 @@ module.exports = {
       // Use hot-loader injected react-dom
       'react-dom': '@hot-loader/react-dom',
       // Source file aliases
+      'api': path.resolve(__dirname,'../src/api'),
       'components': path.resolve(__dirname,'../src/components'),
       'pages': path.resolve(__dirname,'../src/pages'),
       'state': path.resolve(__dirname,'../src/state'),

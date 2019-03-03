@@ -1,47 +1,43 @@
-// Universal API client
-// Server client necessary for SSR. Will need to have authorization
-// set in client for redux based client requests serverside
+// Browser API client
 import axios from 'axios';
+import { methods } from './rest';
 
 class ApiClient {
-  constructor(serverConfig) {
-    this.serverConfig = serverConfig;
-    this.request = axios.request();
+  constructor() {
+    this.generateRequestMethods();
+  }
 
-    // Create instance method for each req method
-    // Data-less methods
-    ['get', 'delete', 'head', 'options'].forEach((method) => {
-      this[method] = (path, options) => this.makeRequest(
-        path,
-        undefined,
-        options,
-      );
-    });
-    // Data methods
-    ['post', 'put', 'patch'].forEach((method) => {
-      this[method] = (path, data, options) => this.makeRequest(
-        path,
-        data,
-        options,
-      );
+  generateRequestMethods() {
+    methods.forEach((method) => {
+      this[method] = (url, options) => this.makeRequest(method, url, options);
     });
   }
 
-  makeRequest(url, data, options) {
-    this.request
-    // On the client we simply format the url to the proxy and make the request
-    // On the server, we need to add credentials from cookies to headers and then make the requests
-    // Maybe I should just use switchboard instead of re-writing this whole thing...
-  }
-
-  // Client side methods
-  formatClientUrl(path) {
-    // simply append a leading '/api' to the request, and ensure leading slash
-  }
-
-  // Server side methods
-  formatServerUrl(path) {
-    // digest config and according to 
+  /**
+   * options include sepecified api as well as any axios request config options
+   * https://github.com/axios/axios#request-config
+   */
+  makeRequest(
+    method,
+    url,
+    {
+      data,
+      params,
+      api,
+      ...options
+    }
+  ) {
+    // TODO handle invalid method
+    return axios({
+      ...options,
+      method,
+      url,
+      // Prepend /api/ to send to proxy
+      baseURL: api ? `/api/${api}/` : '/api/',
+      params,
+      data,
+    });
+    // TODO Handle Error? No. Handle in middleware
   }
 }
 

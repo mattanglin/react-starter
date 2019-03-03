@@ -7,9 +7,10 @@ import { connectRoutes } from 'redux-first-router';
 import restoreScroll from 'redux-first-router-restore-scroll';
 import routes from 'pages/routes';
 import thunk from 'redux-thunk';
+import clientMiddleware from './middleware/client';
 import reducer from './reducer';
 
-const createStore = (data, initialEntries /* client */) => {
+const createStore = (data, client, initialEntries) => {
   const {
     enhancer: routeEnhancer,
     middleware: routerMiddleware,
@@ -19,6 +20,7 @@ const createStore = (data, initialEntries /* client */) => {
 
   const middleware = [
     routerMiddleware,
+    clientMiddleware(client),
     thunk,
   ];
   let enhancers;

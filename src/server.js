@@ -1,11 +1,19 @@
+import express from 'express';
+import morgan from 'morgan';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import compression from 'compression';
+import proxy from 'api/proxy';
+
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import { Provider } from 'react-redux';
-import express from 'express';
-import path from 'path';
 import createStore from 'state/createStore';
 import Html from './Html';
 import App from './App';
+import { server as serverConfig } from './config';
+import ServerClient from './api/ServerClient';
 
 // Render React App Markup for response
 const renderApp = ({ assets, store }) => `<!doctype html>${ReactDOM.renderToString(
@@ -23,15 +31,21 @@ const renderApp = ({ assets, store }) => `<!doctype html>${ReactDOM.renderToStri
 function startServer(parameters) {
   const app = express();
 
-  // Static assets
+  app.use(morgan('tiny'));
+  app.use(cookieParser());
+  app.use(bodyParser.urlencoded({
+    extended: true,
+  }));
+  app.use(bodyParser.json());
+  app.use(compression());
   app.use(express.static(path.join(__dirname, '..', '/build/assets')));
-
-  // TODO MIDDLEWARES!
+  app.use(proxy(serverConfig.proxy));
 
   // React SSR
   app.use((req, res) => {
     const data = {};
-    const { store, thunk } = createStore(data, [req.originalUrl]);
+    const client = new ServerClient(serverConfig.proxy, req);
+    const { store, thunk } = createStore(data, client, [req.originalUrl]);
     const assets = parameters.chunks();
 
     // Router thunk and render

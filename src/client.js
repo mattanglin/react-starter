@@ -3,13 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createStore from 'state/createStore';
+import ApiClient from 'api/ApiClient';
 import App from './App';
 
 // Create store
-const { store } = createStore(window.__data); // eslint-disable-line
+const client = new ApiClient();
+const { store } = createStore(window.__data, client);
 
 
-const render = Component => ReactDOM.hydrate(
+const render = (Component) => ReactDOM.hydrate(
   <Provider key="provider" store={store}>
     <Component />
   </Provider>,

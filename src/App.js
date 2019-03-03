@@ -8,6 +8,7 @@ import { NavBar, RouteSwitch } from 'components';
 import Home from 'pages/Home/Home';
 import Page2 from 'pages/Page2/Page2';
 import Page3 from 'pages/Page3/Page3';
+import People from 'pages/Swapi/People/People';
 import NotFound from 'pages/NotFound/NotFound';
 
 const theme = {
@@ -26,6 +27,7 @@ const App = () => (
           HOME: Home,
           PAGE_2: Page2,
           PAGE_3: Page3,
+          SWAPI_PEOPLE: People,
           [NOT_FOUND]: NotFound,
         }}
       />
