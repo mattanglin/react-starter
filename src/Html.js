@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom/server';
-import serialize from 'serialize-javascript';
 
 const propTypes = {
   assets: PropTypes.shape({
@@ -33,9 +32,9 @@ const Html = ({
         {/* React App Mounting Point */}
         <div id="app" dangerouslySetInnerHTML={{ __html: content }} />
         {/* Javascript */}
-        <script dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(store.getState())};` }} charSet="UTF-8" />
+        <script dangerouslySetInnerHTML={{ __html: `window.__data=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />
         {Object.keys(assets.javascript).map(name => (
-          <script key={name} src={assets.javascript[name]} />
+          <script key={name} src={assets.javascript[name]} charSet="UTF-8" />
         ))}
       </body>
     </html>

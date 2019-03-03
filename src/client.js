@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -6,6 +7,7 @@ import App from './App';
 
 // Create store
 const { store } = createStore(window.__data); // eslint-disable-line
+
 
 const render = Component => ReactDOM.hydrate(
   <Provider key="provider" store={store}>

@@ -8,7 +8,7 @@ import Html from './Html';
 import App from './App';
 
 // Render React App Markup for response
-const renderApp = ({ assets, store }) => `<doctype html>${ReactDOM.renderToString(
+const renderApp = ({ assets, store }) => `<!doctype html>${ReactDOM.renderToString(
   <Html
     assets={assets}
     component={(
@@ -34,10 +34,10 @@ function startServer(parameters) {
     const { store, thunk } = createStore(data, [req.originalUrl]);
     const assets = parameters.chunks();
 
-    // TODO Server Side routing thunk
-    console.log(thunk);
-
-    return res.send(renderApp({ store, assets }));
+    // Router thunk and render
+    thunk(store).then(() => (
+      res.send(renderApp({ store, assets }))
+    ));
   });
 
   // TODO ERROR HANDLING!
