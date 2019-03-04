@@ -1,6 +1,27 @@
 # react-starter
 Universal React / Redux Starter App
 
+## Features
+- Universal React rendering with [universal-webpack](https://github.com/catamphetamine/universal-webpack)
+- Universal routing with [redux-first-router](https://github.com/faceyspacey/redux-first-router)
+- Universal API client and express proxy with support for multiple api/auth sources with [axios](https://github.com/axios/axios)
+- Universal CSS-in-JS styling with [Emotion](https://github.com/emotion-js/emotion)
+- HMR dev flow with [react-hot-loader](https://github.com/gaearon/react-hot-loader)
+
+
+## Install
+
+```
+yarn
+```
+
+## Development
+
+```
+yarn dev
+```
+
+
 ## Roadmap
 - [x] Basic SSR setup
 - [x] Routing (RFR)
