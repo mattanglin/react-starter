@@ -5,9 +5,9 @@ Universal React / Redux Starter App
 - [x] Basic SSR setup
 - [x] Routing (RFR)
 - [x] Styling (Emotion)
-- [ ] @babel/register for dev server build instead of babel-loader
-- [ ] Universal API client
-- [ ] api proxy
+- [x] source-mapping
+- [x] Universal API client
+- [x] api proxy
 - [ ] auth proxy
 - [ ] Dev Flow
 - [ ] Prod Build

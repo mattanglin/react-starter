@@ -1,8 +1,7 @@
+require('source-map-support/register');
 var startServer = require('universal-webpack/server');
 var settings = require('../webpack/universal-webpack-settings');
 var config = require('../webpack/dev.config');
-
-// TODO Use @babel/register for server instead of babel-loader for better sourcemapping...
 
 // Set Globals
 global.__CLIENT__ = false;

@@ -5,6 +5,7 @@ var projectDir = path.resolve(__dirname, '..');
 module.exports = {
   context: projectDir,
   mode: 'development',
+  devtool: 'source-map',
   entry: './src/client.js',
   output: {
     path: path.resolve(projectDir, 'build/assets'),

@@ -62,7 +62,8 @@
     "redux-first-router-link": "^2.1.1",
     "redux-first-router-restore-scroll": "^1.2.2",
     "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "source-map-support": "^0.5.10"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
