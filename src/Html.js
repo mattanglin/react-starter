@@ -33,7 +33,7 @@ const Html = ({
         <div id="app" dangerouslySetInnerHTML={{ __html: content }} />
         {/* Javascript */}
         <script dangerouslySetInnerHTML={{ __html: `window.__data=${JSON.stringify(store.getState())};` }} charSet="UTF-8" />
-        {Object.keys(assets.javascript).map(name => (
+        {Object.keys(assets.javascript).map((name) => (
           <script key={name} src={assets.javascript[name]} charSet="UTF-8" />
         ))}
       </body>

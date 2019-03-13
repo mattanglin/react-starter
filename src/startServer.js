@@ -1,7 +1,7 @@
 require('source-map-support/register');
 var startServer = require('universal-webpack/server');
 var settings = require('../webpack/universal-webpack-settings');
-var config = require('../webpack/dev.config');
+var config = require('../webpack/common.config');
 
 // Set Globals
 global.__CLIENT__ = false;

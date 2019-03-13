@@ -1,3 +1,4 @@
-/webpack/
+/build/
 /scripts/
+/webpack/
 src/startServer.js

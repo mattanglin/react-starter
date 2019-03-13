@@ -38,7 +38,8 @@ function startServer(parameters) {
   }));
   app.use(bodyParser.json());
   app.use(compression());
-  app.use(express.static(path.join(__dirname, '..', '/build/assets')));
+  // This always refers to the build as that's where it's served from
+  app.use(express.static(path.join(__dirname, '..', '/assets')));
   app.use(proxy(serverConfig.proxy));
 
   // React SSR
