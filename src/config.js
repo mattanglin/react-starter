@@ -1,15 +1,18 @@
 // NOTE DO NOT place any secret keys in your client config!
-export const client = {
-
+const config = {
+  someclientconfig: 'value...',
 };
 
-// Config for server
-export const server = {
-  proxy: {
+// Server Only Config (Not exposed to client)
+if (__SERVER__) {
+  // Append Secrets to server config from env vars
+  config.host = process.env.HOST || 'http://localhost';
+  config.port = process.env.PORT || 3000;
+  config.proxy = {
     apis: [
       {
         name: 'swapi',
-        url: 'https://swapi.co/api',
+        url: process.env.SWAPI_API_HOST,
         // auth: Optional Auth Name
       },
     ],
@@ -17,8 +20,10 @@ export const server = {
       {
         name: 'authname',
         // Auth based parameters?
-        // secret: 'auth secret',
+        // secret: process.env.MY_API_SECRET,
       },
     ],
-  }
-};
+  };
+}
+
+export default config;

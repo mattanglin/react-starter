@@ -5,7 +5,6 @@ import baseConfig from './prod.config';
 
 const clientConfiguration = client(baseConfig, settings);
 
-clientConfiguration.output.publicPath = '/';
 clientConfiguration.plugins.push(new webpack.DefinePlugin({
   __CLIENT__: true,
   __SERVER__: false,

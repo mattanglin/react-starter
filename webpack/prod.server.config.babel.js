@@ -6,5 +6,6 @@ const config = server(baseConfig, settings);
 
 config.target = 'node';
 config.mode = 'development';
+config.output.publicPath = '/assets/';
 
 export default config;

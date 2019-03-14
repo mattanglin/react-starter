@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import createStore from 'state/createStore';
 import Html from './Html';
 import App from './App';
-import { server as serverConfig } from './config';
+import config from './config';
 import ServerClient from './api/ServerClient';
 
 // Render React App Markup for response
@@ -38,27 +38,34 @@ function startServer(parameters) {
   }));
   app.use(bodyParser.json());
   app.use(compression());
-  // This always refers to the build as that's where it's served from
-  app.use(express.static(path.join(__dirname, '..', '/assets')));
-  app.use(proxy(serverConfig.proxy));
+  // This always refers to the build dir as that's where it's served from
+  app.use('/assets', express.static(path.join(__dirname, '..', '/assets')));
+  app.use(proxy(config.proxy));
 
   // React SSR
-  app.use((req, res) => {
-    const data = {};
-    const client = new ServerClient(serverConfig.proxy, req);
-    const { store, thunk } = createStore(data, client, [req.originalUrl]);
-    const assets = parameters.chunks();
-
-    // Router thunk and render
-    thunk(store).then(() => (
-      res.send(renderApp({ store, assets }))
-    ));
+  app.use((req, res, next) => {
+    try {
+      const data = {};
+      const client = new ServerClient(config.proxy, req);
+      const { store, thunk } = createStore(data, client, [req.originalUrl]);
+      const assets = parameters.chunks();
+  
+      // Router thunk and render
+      thunk(store)
+        .then(() => res.send(renderApp({ store, assets })))
+        .catch((err) => next(err));
+    } catch (err) {
+      next(err);
+    }
   });
 
-  // TODO ERROR HANDLING!
+  // ERROR HANDLING!
+  app.use((err) => {
+    console.log('HANDLING ERROR!!!!', err);
+  });
 
   // Run Server
-  app.listen(3000, () => console.log('Server running on port 3000...'));
+  app.listen(config.port, () => console.log(`Server listening at ${config.host} on port ${config.port}`));
 }
 
 export default startServer;

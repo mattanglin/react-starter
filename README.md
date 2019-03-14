@@ -40,10 +40,10 @@ File Structure:
 ```
 /
 webpack/
+  common.config.js
   dev.config.js
   dev.client.config.babel.js
   dev.server.config.babel.js
-  devServer.js
   prod.config.js
   prod.client.config.babel.js
   prod.server.config.js

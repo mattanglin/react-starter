@@ -4,15 +4,18 @@ import settings from './universal-webpack-settings';
 import baseConfig from './dev.config';
 
 const clientConfiguration = client(baseConfig, settings);
+const host = process.env.DEV_HOST || 'http://localhost';
+const port = process.env.DEV_PORT || 3001;
 
 // Add webpack-dev-server settings
 clientConfiguration.devServer = {
-  port: 3001,
+  port,
   headers: {
     'Access-Control-Allow-Origin': '*',
   },
 };
-clientConfiguration.output.publicPath = 'http://localhost:3001/assets/';
+
+clientConfiguration.output.publicPath = `${host}:${port}/assets/`;
 clientConfiguration.plugins.push(new webpack.DefinePlugin({
   __CLIENT__: true,
   __SERVER__: false,

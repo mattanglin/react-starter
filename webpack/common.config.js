@@ -1,6 +1,8 @@
 // var webpack = require('webpack');
 var path = require('path');
 var projectDir = path.resolve(__dirname, '..');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 
 module.exports = {
   context: projectDir,
@@ -31,6 +33,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 5120,
+              fallBack: 'file-loader',
             },
           },
         ],
@@ -63,6 +66,7 @@ module.exports = {
     hints: false,
   },
   plugins: [
+    new CleanWebpackPlugin(),
     // TODO
     // new webpack.DefinePlugin({
     //   // ENV vars
