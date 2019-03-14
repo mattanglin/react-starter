@@ -35,4 +35,5 @@ const App = () => (
   </ThemeProvider>
 );
 
+export const UnconnectedApp = App;
 export default hot(App);
