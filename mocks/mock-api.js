@@ -9,11 +9,13 @@ const api = express.Router();
 const port = process.env.MOCK_PORT || 3030;
 const host = process.env.MOCK_HOST || 'http://localhost';
 
+console.log('MOCK:', host, port);
 
 mockApi.use(morgan('tiny'));
 mockApi.use(bodyParser.urlencoded({
   extended: true,
 }));
+mockApi.get('/', (req, res) => res.send('API running'));
 
 // Mock API endpoints
 mockApi.use('/api/v1', api);

@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint src/**/*.js",
-    "test": "npm run dev:mock & npm run dev & wait-on http-get://localhost:3000 http-get://localhost:3003/reset-mock && cypress run",
-    "test:local": "npm run dev:mock & npm run dev & wait-on http-get://localhost:3000 http-get://localhost:3003/reset-mock && cypress open",
+    "test": "node ./scripts/test.js",
+    "test:local": "cypress open",
     "dev": "npm run dev:server:prepare && npm run dev:run",
     "dev:run": "concurrently --kill-others \"npm run dev:server:build\" \"npm run dev:server:run\" \"npm run dev:client:run\"",
     "dev:server:prepare": "universal-webpack --settings ./webpack/universal-webpack-settings.json prepare",
@@ -51,6 +51,12 @@
         "MOCK_PORT": 3003,
         "MOCK_HOST": "http://localhost"
       }
+    },
+    "test": {
+      "PORT": 3000,
+      "HOST": "http://localhost",
+      "MOCK_PORT": 3003,
+      "MOCK_HOST": "http://localhost"
     },
     "build": {
       "command": "npm run prod:client:build && npm run prod:server:build",
